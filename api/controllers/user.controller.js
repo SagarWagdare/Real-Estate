@@ -1,3 +1,3 @@
 export const test = (req,res)=>{
-  res.send("Heelo WOrld")
+  res.send("Hello WOrld")
   }
