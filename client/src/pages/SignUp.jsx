@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import axios from "axios";
+import OAuth from "../components/OAuth";
 const SignUp = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({});
@@ -88,8 +89,14 @@ const SignUp = () => {
             </a>
           </div> */}
           </div>
-          <span className="text-red-600 p-2">{error}</span>
+          <div className="text-sm pt-1 flex gap-1">
+            <p>Already have an account?</p>
+            <Link to="/sign-in" className="text-blue-800 font-semibold">
+              Sign in
+            </Link>
+          </div>
           <div>
+          <span className="text-red-600 ">{error}</span>
             <button
               type="submit"
               className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
@@ -97,22 +104,8 @@ const SignUp = () => {
               {loading ? "Loading..." : "Sign up"}
             </button>
           </div>
-          <div className="text-sm pt-1 flex gap-1">
-            <p>Already have an account?</p>
-            <Link to="/sign-in" className="text-blue-800 font-semibold">
-              Sign in
-            </Link>
-          </div>
-          <span className="flex justify-center  items-center">or</span>
-          <div className="">
-            <button
-              type="submit"
-              className="flex w-full items-center gap-1 justify-center rounded-md bg-white text-black px-3 py-1.5 text-sm font-semibold leading-6 shadow-sm hover:bg-gray-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            >
-              <FcGoogle />
-              Log in with Google
-            </button>
-          </div>
+          
+         <OAuth/>
         </form>
       </div>
     </div>

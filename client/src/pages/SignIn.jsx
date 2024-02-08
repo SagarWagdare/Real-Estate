@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux"
 import {signInStart,signInSuccess} from "../redux/user/userSlice"
+import OAuth from "../components/OAuth";
 const Signin = () => {
   const [formData, setFormData] = useState({});
   const {loading,error} = useSelector((state)=>state.user)
@@ -24,9 +25,7 @@ const Signin = () => {
         navigate("/");
       })
       .catch((err) => {
-        setError(err?.response?.data?.message);
         dispatch(signInStart(err?.response?.data?.message))
-        setLoading(false);
         console.log(err)
       });
   };
@@ -74,6 +73,7 @@ const Signin = () => {
               Forgot password?
             </a>
           </div> */}
+          <span className="text-red-600 p-2">{error}</span>
             <div className="text-sm pt-1 flex gap-1">
               <p>Don&apos;t have an account?</p>
               <Link to="/sign-up" className="text-blue-800 font-semibold">
@@ -81,7 +81,6 @@ const Signin = () => {
               </Link>
             </div>
           </div>
-          <span className="text-red-600 p-2">{error}</span>
           <div>
             <button
               type="submit"
@@ -90,6 +89,7 @@ const Signin = () => {
               {loading ? "Loading..." : "Sign in"}
             </button>
           </div>
+          <OAuth/>
         </form>
       </div>
     </div>
