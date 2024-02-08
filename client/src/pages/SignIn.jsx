@@ -1,29 +1,33 @@
-import axios from 'axios';
-import React, { useState } from 'react'
-import {Link, useNavigate} from "react-router-dom"
+import axios from "axios";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux"
+import {signInStart,signInSuccess} from "../redux/user/userSlice"
 const Signin = () => {
-  const [formData,setFormData] = useState({});
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({});
+  const {loading,error} = useSelector((state)=>state.user)
   const navigate = useNavigate();
-  const handleChange = (e)=>{
-  setFormData({
-    ...formData,
-    [e.target.id]:e.target.value
-  })
-  }
+  const dispatch = useDispatch()
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.id]: e.target.value,
+    });
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    dispatch(signInStart())
     axios
       .post("/api/auth/signin", formData)
       .then((res) => {
-        setLoading(false);
+        dispatch(signInSuccess(res?.data))
         navigate("/");
       })
       .catch((err) => {
         setError(err?.response?.data?.message);
+        dispatch(signInStart(err?.response?.data?.message))
         setLoading(false);
+        console.log(err)
       });
   };
   return (
@@ -36,7 +40,6 @@ const Signin = () => {
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <form className="space-y-6" onSubmit={handleSubmit} method="POST">
-         
           <div>
             <div className="mt-2">
               <input
@@ -45,7 +48,7 @@ const Signin = () => {
                 type="email"
                 autoComplete="email"
                 placeholder="Email"
-onChange={handleChange}
+                onChange={handleChange}
                 required
                 className="p-2 block w-full rounded-md  py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
@@ -73,7 +76,9 @@ onChange={handleChange}
           </div> */}
             <div className="text-sm pt-1 flex gap-1">
               <p>Don&apos;t have an account?</p>
-              <Link to="/sign-up" className="text-blue-800 font-semibold">Sign up</Link>
+              <Link to="/sign-up" className="text-blue-800 font-semibold">
+                Sign up
+              </Link>
             </div>
           </div>
           <span className="text-red-600 p-2">{error}</span>
@@ -85,11 +90,10 @@ onChange={handleChange}
               {loading ? "Loading..." : "Sign in"}
             </button>
           </div>
-          
         </form>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Signin
+export default Signin;
