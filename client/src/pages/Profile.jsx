@@ -67,6 +67,7 @@ const Profile = () => {
           className="w-24 h-24 rounded-full object-cover self-center"
         />
        <p className="text-center text-sm font-semibold">
+    
        {fileUploadError ?
   <span className="text-red-700">
     Error image upload (image must be less than 2 mb)
@@ -74,7 +75,7 @@ const Profile = () => {
   (filePercentage > 0 && filePercentage < 100 ?
     <span>{`uploading ${filePercentage}%`}</span> :
     (filePercentage === 100 ?
-      <span className="text-green-700">Image successfully uploaded!</span> :
+      <span className="text-green-700">Image  successfully uploaded!</span> :
       ''
     )
   )
