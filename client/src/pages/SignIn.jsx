@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux"
-import {signInStart,signInSuccess} from "../redux/user/userSlice"
+import {signInFailure, signInStart,signInSuccess} from "../redux/user/userSlice"
 import OAuth from "../components/OAuth";
 const Signin = () => {
   const [formData, setFormData] = useState({});
@@ -25,9 +25,11 @@ const Signin = () => {
         navigate("/");
       })
       .catch((err) => {
-        dispatch(signInStart(err?.response?.data?.message))
+        dispatch(signInFailure(err?.response?.data?.message))
         console.log(err)
       });
+      dispatch(signInStart())
+
   };
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-5 lg:px-8">
