@@ -9,10 +9,12 @@ import {
 } from "firebase/storage";
 import { app } from "../firebase";
 import axios from "axios"
-import { signInSuccess, updateUserFailure, updateUserStart, updateUserSuccess } from "../redux/user/userSlice";
+import { deleteUserFailure, deleteUserStart, deleteUserSuccess, updateUserFailure, updateUserStart, updateUserSuccess } from "../redux/user/userSlice";
+import {useNavigate} from "react-router-dom"
 const Profile = () => {
   const dispatch = useDispatch();
   const { currentUser,loading,error } = useSelector((state) => state.user);
+  const navigate = useNavigate();
   const [file, setFile] = useState(undefined);
   const [filePercentage, setFilePercentage] = useState(0);
   const [fileUploadError, setFileUploadError] = useState(false);
@@ -71,6 +73,18 @@ setUpdateSuccess(true)
     }).catch((err)=>{
       console.log(err)
       dispatch(updateUserFailure(err?.message))
+    })
+
+  }
+
+  const handleDeleteUser = async()=>{
+    dispatch(deleteUserStart());
+    await axios.delete(`/api/user/delete/${currentUser._id}`).then((res)=>{
+      console.log(res)
+      dispatch(deleteUserSuccess(res))
+
+    }).catch((err)=>{
+      dispatch(deleteUserFailure(err.message))
     })
 
   }
@@ -137,8 +151,8 @@ setUpdateSuccess(true)
         </button>
       </form>
       <div className="flex justify-between mt-5">
-        <span className="text-red-700 font-semibold">Delete account</span>
-        <span className="text-red-700 font-semibold">Log out</span>
+        <span onClick={handleDeleteUser} className="text-red-700 font-semibold cursor-pointer">Delete account</span>
+        <span className="text-red-700 font-semibold cursor-pointer">Log out</span>
       </div>
       <p className="text-red-600 text-sm text-center font-semibold">{error?error:''}</p>
         <p className="text-green-600 text-sm text-center font-semibold">{updateSuccess?'user is updated successfully!':''}</p>
