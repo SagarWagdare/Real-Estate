@@ -163,8 +163,7 @@ const Profile = () => {
           type="password"
           id="password"
           className="border p-3 rounded-lg"
-          placeholder="
-        password"
+          placeholder="password"
           onChange={handleChange}
         />
 
