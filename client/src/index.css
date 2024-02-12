@@ -5,3 +5,7 @@
 body{
   background-color: rgb(240, 238, 238);
 }
+
+body::-webkit-scrollbar{
+ display: none;
+}
