@@ -8,11 +8,15 @@ import "swiper/css/bundle";
 import { FaShare, FaBed, FaBath, FaParking, FaChair } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { Autoplay } from "swiper/modules";
+import { useSelector } from "react-redux";
+import Contact from "../components/Contact";
 const Listing = () => {
   SwiperCore.use([Navigation]);
   SwiperCore.use([Autoplay]);
   const params = useParams();
   const [listing, setListing] = useState(null);
+  const [contact, setContact] = useState(false);
+  const { currentUser } = useSelector((state) => state.user);
   const [listingError, setListingError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -125,7 +129,7 @@ const Listing = () => {
               </li>
               <li className="flex items-center gap-2 whitespace-nowrap">
                 <FaParking />
-                {listing.parking ? "Parking" : "No Parking"} 
+                {listing.parking ? "Parking" : "No Parking"}
               </li>
               <li className="flex items-center gap-2 whitespace-nowrap">
                 <FaChair />
@@ -133,6 +137,15 @@ const Listing = () => {
                 Furnished
               </li>
             </ul>
+            {currentUser && listing.userRef === currentUser._id && !contact &&(
+              <button
+                onClick={() => setContact(true)}
+                className="bg-slate-700 text-white p-3 rounded-lg uppercase"
+              >
+                Contact Landlord
+              </button>
+            )}
+            {contact && <Contact listing={listing} />}
           </div>
         </>
       )}
