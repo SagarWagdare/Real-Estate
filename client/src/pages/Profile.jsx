@@ -27,7 +27,6 @@ const Profile = () => {
   const [fileUploadError, setFileUploadError] = useState(false);
   const [formData, setFormData] = useState({});
   const [updateSuccess, setUpdateSuccess] = useState(false);
-  console.log("👉 ~ Profile ~ formData⭐", formData);
   const fileRef = useRef(null);
 
   useEffect(() => {
