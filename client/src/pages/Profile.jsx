@@ -129,6 +129,20 @@ const Profile = () => {
       setShowListingsError(true);
     }
   };
+
+  const handleDeleteListing = async (listingId) => {
+    await axios
+      .delete(`/api/listing/delete/${listingId}`)
+      .then((res) => {
+        console.log(res);
+        setUserListings((prev) =>
+          prev.filter((listing) => listing._id !== listingId)
+        );
+      })
+      .catch((err) => {
+        console.log(err)
+      });
+  };
   return (
     <div className="p-3 max-w-lg mx-auto">
       <h1 className="text-3xl text-center font-semibold my-7">Profile</h1>
@@ -227,9 +241,11 @@ const Profile = () => {
         <p className="text-sm text-red-700 mt-5">Error Showing Listings</p>
       )}
 
-      {userlistings && userlistings.length > 0 ? (
+      {userlistings && userlistings.length > 0 && (
         <div>
-          <h1 className="text-center mt-5 text-2xl font-semibold">Your Listings</h1>
+          <h1 className="text-center mt-5 text-2xl font-semibold">
+            Your Listings
+          </h1>
           {userlistings.map((listings) => (
             <div
               key={listings._id}
@@ -249,14 +265,18 @@ const Profile = () => {
                 <p>{listings?.name}</p>
               </Link>
               <div className="flex flex-col items-center font-semibold">
-                <button className="text-red-700 uppercase">Delete</button>
+                <button
+                  className="text-red-700 uppercase"
+                  onClick={() => handleDeleteListing(listings._id)}
+                >
+                  Delete
+                </button>
                 <button className="text-green-700 uppercase">Edit</button>
               </div>
             </div>
           ))}
         </div>
-      ):<div>
-        No listing found</div>}
+      ) }
     </div>
   );
 };
