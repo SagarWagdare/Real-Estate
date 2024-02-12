@@ -260,7 +260,7 @@ const Profile = () => {
               </Link>
               <Link
                 className="font-semibold text-slate-700 flex-1 hover:underline truncate"
-                to={`/listings/${listings._id}`}
+                to={`/listing/${listings._id}`}
               >
                 <p>{listings?.name}</p>
               </Link>
