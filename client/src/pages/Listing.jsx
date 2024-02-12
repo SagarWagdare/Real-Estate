@@ -5,9 +5,12 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore from "swiper";
 import { Navigation } from "swiper/modules";
 import "swiper/css/bundle";
-import { FaShare } from "react-icons/fa";
+import { FaShare, FaBed, FaBath, FaParking, FaChair } from "react-icons/fa";
+import { FaLocationDot } from "react-icons/fa6";
+import { Autoplay } from "swiper/modules";
 const Listing = () => {
   SwiperCore.use([Navigation]);
+  SwiperCore.use([Autoplay]);
   const params = useParams();
   const [listing, setListing] = useState(null);
   const [listingError, setListingError] = useState(false);
@@ -45,11 +48,18 @@ const Listing = () => {
       )}
       {listing && !loading && !listingError && (
         <>
-          <Swiper navigation>
+          <Swiper
+            navigation
+            loop={true}
+            autoplay={{
+              delay: 3000,
+              disableOnInteraction: false,
+            }}
+          >
             {listing.imageUrls.map((url) => (
               <SwiperSlide key={url}>
                 <div
-                  className="h-[550px] "
+                  className="sm:h-[500px] h-[300px] object-contain "
                   style={{
                     background: `url(${url}) center no-repeat`,
                     backgroundSize: "cover",
@@ -69,12 +79,61 @@ const Listing = () => {
                 }, 2000);
               }}
             />
-           
           </div>
           {copied && (
-              <p className="z-10 rounded-md bg-white text-black p-2
-              fixed top-[20%] right-[8%]">Link copied!</p>
-            )}
+            <p
+              className="z-10 rounded-md bg-white text-black p-2
+              fixed top-[20%] right-[8%]"
+            >
+              Link copied!
+            </p>
+          )}
+
+          <div className="flex flex-col max-w-4xl mx-auto p-3 my-7 gap-4 ">
+            <p className="text-2xl font-semibold">
+              {listing.name} - $
+              {listing.offer
+                ? listing.discountPrice.toLocaleString("en-US")
+                : listing.regularPrice.toLocaleString("en-US")}
+              {listing.type === "rent" && "/month"}
+            </p>
+            <p className="flex items-center text-slate-700 font-semibold">
+              <FaLocationDot className="text-green-700" />
+              {listing.address}
+            </p>
+            <div className="flex gap-4">
+              <p className="bg-red-900 w-[200px] h-[40px] text-center rounded-lg text-white p-2">
+                {listing.type === "rent" ? "For Rent" : "For Sale"}
+              </p>
+              {listing.offer && (
+                <p className="bg-green-900 w-[200px] h-[40px] text-center rounded-lg text-white p-2">
+                  ${+listing.regularPrice - +listing.discountPrice} OFF
+                </p>
+              )}
+            </div>
+            <div>
+              <span className="font-semibold">Description</span> -{" "}
+              {listing.description}
+            </div>
+            <ul className="text-green-900 font-semibold flex items-center gap-4 flex-wrap">
+              <li className="flex items-center gap-2 whitespace-nowrap">
+                <FaBed /> {listing.bedrooms} Beds
+              </li>
+              <li className="flex items-center gap-2 whitespace-nowrap">
+                <FaBath />
+                {listing.bathrooms} Bath
+              </li>
+              <li className="flex items-center gap-2 whitespace-nowrap">
+                <FaParking />
+                {listing.parking ? "Parking" : "No Parking"} 
+              </li>
+              <li className="flex items-center gap-2 whitespace-nowrap">
+                <FaChair />
+                {listing.furnished ? "Full " : "Not "}
+                Furnished
+              </li>
+            </ul>
+          </div>
         </>
       )}
     </main>
@@ -82,4 +141,3 @@ const Listing = () => {
 };
 
 export default Listing;
-// navigator.clipboard.writeText(window.location.href);

@@ -238,7 +238,7 @@ const CreateListing = () => {
             <div className="flex items-center gap-2 ">
               <input
                 type="number"
-                id="bedroom"
+                id="bedrooms"
                 min="1"
                 max="10"
                 className="p-3 border-gray-300 rounded-lg"
@@ -251,7 +251,7 @@ const CreateListing = () => {
             <div className="flex items-center gap-2 ">
               <input
                 type="number"
-                id="bathroom"
+                id="bathrooms"
                 min="1"
                 max="10"
                 className="p-3 border-gray-300 rounded-lg"
