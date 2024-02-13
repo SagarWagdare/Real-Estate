@@ -28,7 +28,7 @@ navigate(`/search?${searchQuery}`)
     <header className="flex bg-slate-200 shadow-md justify-between items-center  mx-auto p-3">
       <Link to="/">
         <h1 className="font-bold text-sm sm:text-2xl flex flex-wrap">
-          <span className="text-red-900">Real</span>
+          <span className="text-red-900">Sagar</span>
           <span className="text-red-950">Estate</span>
         </h1>
       </Link>

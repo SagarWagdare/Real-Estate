@@ -55,10 +55,7 @@ const Listing = () => {
           <Swiper
             navigation
             loop={true}
-            autoplay={{
-              delay: 3000,
-              disableOnInteraction: false,
-            }}
+            
           >
             {listing.imageUrls.map((url) => (
               <SwiperSlide key={url}>
