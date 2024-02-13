@@ -9,7 +9,11 @@ dotenv.config();
 import authRouter from "./routes/auth.route.js"
 import userRouter from "./routes/user.route.js"
 import listingRouter from './routes/listing.route.js'
-mongoose.connect(process.env.MONGO_URI).then(()=>{
+mongoose.connect(process.env.MONGO_URI,{
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
+  useCreateIndex: true,
+}).then(()=>{
 app.listen(process.env.PORT,()=>{
   console.log(`Server is listening on Port ${process.env.PORT}`)
 })
