@@ -13,8 +13,9 @@ const Search = () => {
     sort: "created_at",
     order: "desc",
   });
-const [loading,setLoading] = useState(false)
-const [listing,setListing] = useState([])
+  const [loading, setLoading] = useState(false);
+  const [showMore, setShowMore] = useState(false);
+  const [listing, setListing] = useState([]);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -86,19 +87,27 @@ const [listing,setListing] = useState([])
         order: orderFromUrl || "desc",
       });
     }
-    const fetchListing = async ()=>{
-      setLoading(true)
+    const fetchListing = async () => {
+      setLoading(true);
+      setShowMore(false)
       const searchQuery = urlParams.toString();
-      await axios.get(`/api/listing/get?${searchQuery}`).then((res)=>{
-        console.log(res);
-        setListing(res?.data);
-        setLoading(false)
-      }).catch((err)=>{
-        console.log(err)
-        setLoading(false)
-      })
-    }
-    fetchListing()
+      await axios
+        .get(`/api/listing/get?${searchQuery}`)
+        .then((res) => {
+          setListing(res?.data);
+          if (res?.data?.length > 8) {
+            setShowMore(true);
+          } else {
+            setShowMore(false);
+          }
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.log(err);
+          setLoading(false);
+        });
+    };
+    fetchListing();
   }, [location.search]);
 
   const handleSubmit = async (e) => {
@@ -112,6 +121,25 @@ const [listing,setListing] = useState([])
     urlParams.set("furnished", sideBarData.furnished);
     const searchQuery = urlParams.toString();
     navigate(`/search?${searchQuery}`);
+  };
+
+  const onShowMoreClick = async () => {
+    const numberOfLIstings = listing.length;
+    const urlParams = new URLSearchParams(location.search);
+    const startIndex = numberOfLIstings;
+    urlParams.set("startIndex", startIndex);
+    const searchQuery = urlParams.toString();
+    await axios
+      .get(`/api/listing/get?${searchQuery}`)
+      .then((res) => {
+        if (res?.data.length < 9) {
+          setShowMore(false);
+        }
+        setListing([...listing, ...res?.data]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   return (
     <div className="flex flex-col md:flex-row">
@@ -210,7 +238,10 @@ const [listing,setListing] = useState([])
               <option value="createdAt_asc">Oldest</option>
             </select>
           </div>
-          <button type="submit"  className="bg-slate-700 text-white p-3 hover:opacity-95 rounded-lg">
+          <button
+            type="submit"
+            className="bg-slate-700 text-white p-3 hover:opacity-95 rounded-lg"
+          >
             Search
           </button>
         </form>
@@ -224,15 +255,24 @@ const [listing,setListing] = useState([])
           {!loading && listing.length === 0 && (
             <p className="text-xl text-slate-700 ">No Listing found!</p>
           )}
-          {
-            loading && (
-              <p className="text-center text-xl text-slate-700">Loading...</p>
-            )
-          }
+          {loading && (
+            <p className="text-center text-xl text-slate-700">Loading...</p>
+          )}
 
-          {!loading && listing && listing.map((listItem)=>(
-            <ListingItems key={listItem._id} listItem={listItem}/>
-          ))}
+          {!loading &&
+            listing &&
+            listing.map((listItem) => (
+              <ListingItems key={listItem._id} listItem={listItem} />
+            ))}
+
+          {showMore && (
+            <button
+              className="text-green-700 hover:underline p-7"
+              onClick={onShowMoreClick}
+            >
+              Show more...
+            </button>
+          )}
         </div>
       </div>
     </div>
