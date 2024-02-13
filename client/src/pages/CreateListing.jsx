@@ -131,8 +131,21 @@ const CreateListing = () => {
     e.preventDefault();
     if (formData.imageUrls.length < 1)
       return setError("You must upload at least one image");
-    if (formData.regularPrice < formData.discountPrice)
-      return setError("Discount Price must be lower than regular price");
+    console.log(formData.regularPrice,"formData.regularPrice")
+    console.log(formData.discountPrice,'formData.discountPrice')
+    const regularPrice = parseFloat(formData.regularPrice);
+  const discountPrice = parseFloat(formData.discountPrice);
+
+  if (isNaN(regularPrice) || isNaN(discountPrice)) {
+    return setError("Please enter valid prices.");
+  }
+
+  console.log(regularPrice, "formData.regularPrice");
+  console.log(discountPrice, 'formData.discountPrice');
+
+  if (regularPrice <= discountPrice) {
+    return setError("Discount Price must be lower than regular price");
+  }
     setLoading(true);
 
     await axios
