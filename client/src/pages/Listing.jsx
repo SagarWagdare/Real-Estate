@@ -137,7 +137,7 @@ const Listing = () => {
                 Furnished
               </li>
             </ul>
-            {currentUser && listing.userRef === currentUser._id && !contact &&(
+            {currentUser && listing.userRef !== currentUser._id && !contact &&(
               <button
                 onClick={() => setContact(true)}
                 className="bg-slate-700 text-white p-3 rounded-lg uppercase"
