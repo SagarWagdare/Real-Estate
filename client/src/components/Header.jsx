@@ -64,7 +64,7 @@ navigate(`/search?${searchQuery}`)
           <img src={currentUser?.avatar} className="w-7 h-7 rounded-full object-cover" alt="user-image" />
   
   ):(
-    <li className="hidden sm:inline text-slate-700 hover:underline hover:text-black">
+    <li className=" sm:inline text-slate-700 hover:underline hover:text-black">
     Sign in
   </li>
   )}
