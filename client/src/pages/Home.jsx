@@ -12,7 +12,6 @@ const Home = () => {
   SwiperCore.use([Autoplay]);
 
   const [offerListings, setOfferListings] = useState([]);
-  console.log("👉 ~ Home ~ offerListings⭐", offerListings);
   const [saleListings, setSaleListings] = useState([]);
   const [rentListings, setRentListings] = useState([]);
 

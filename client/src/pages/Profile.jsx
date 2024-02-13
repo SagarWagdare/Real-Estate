@@ -24,12 +24,10 @@ const Profile = () => {
   // const navigate = useNavigate();
   const [file, setFile] = useState(undefined);
   const [showListingsError, setShowListingsError] = useState(false);
-  console.log("👉 ~ Profile ~ showListingsError⭐", showListingsError);
   const [filePercentage, setFilePercentage] = useState(0);
   const [fileUploadError, setFileUploadError] = useState(false);
   const [formData, setFormData] = useState({});
   const [userlistings, setUserListings] = useState([]);
-  console.log("👉 ~ Profile ~ userlistings⭐", userlistings);
   const [updateSuccess, setUpdateSuccess] = useState(false);
   const fileRef = useRef(null);
 

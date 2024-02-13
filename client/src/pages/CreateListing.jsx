@@ -131,8 +131,6 @@ const CreateListing = () => {
     e.preventDefault();
     if (formData.imageUrls.length < 1)
       return setError("You must upload at least one image");
-    console.log(formData.regularPrice,"formData.regularPrice")
-    console.log(formData.discountPrice,'formData.discountPrice')
     const regularPrice = parseFloat(formData.regularPrice);
   const discountPrice = parseFloat(formData.discountPrice);
 
@@ -140,8 +138,6 @@ const CreateListing = () => {
     return setError("Please enter valid prices.");
   }
 
-  console.log(regularPrice, "formData.regularPrice");
-  console.log(discountPrice, 'formData.discountPrice');
 
   if (regularPrice <= discountPrice) {
     return setError("Discount Price must be lower than regular price");
