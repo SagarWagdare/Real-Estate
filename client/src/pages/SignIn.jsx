@@ -91,7 +91,7 @@ const Signin = () => {
               {loading ? "Loading..." : "Sign in"}
             </button>
           </div>
-          <OAuth/>
+          {/* <OAuth/> */}
         </form>
       </div>
     </div>

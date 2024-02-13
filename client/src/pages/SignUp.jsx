@@ -105,7 +105,7 @@ const SignUp = () => {
             </button>
           </div>
           
-         <OAuth/>
+         {/* <OAuth/> */}
         </form>
       </div>
     </div>
