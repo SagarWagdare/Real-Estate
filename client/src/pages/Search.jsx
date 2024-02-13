@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ListingItems from "../components/ListingItems";
 
 const Search = () => {
   const [sideBarData, setSideBarData] = useState({
@@ -114,7 +115,7 @@ const [listing,setListing] = useState([])
   };
   return (
     <div className="flex flex-col md:flex-row">
-      <div className="p-7 border-b-2 sm:border-r-2 md:min-h-screen">
+      <div className="p-7 border-b-2 md:border-r-2 md:min-h-screen">
         <form className="flex flex-col gap-8" onSubmit={handleSubmit}>
           <div className="flex items-center gap-2">
             <label className="whitespace-nowrap font-semibold">
@@ -214,10 +215,25 @@ const [listing,setListing] = useState([])
           </button>
         </form>
       </div>
-      <div className="">
+      <div className="flex-1">
         <h1 className="text-3xl font-semibold border-b p-3 mt-5">
           Listing results:
         </h1>
+
+        <div className="p-7 flex flex-wrap gap-4">
+          {!loading && listing.length === 0 && (
+            <p className="text-xl text-slate-700 ">No Listing found!</p>
+          )}
+          {
+            loading && (
+              <p className="text-center text-xl text-slate-700">Loading...</p>
+            )
+          }
+
+          {!loading && listing && listing.map((listItem)=>(
+            <ListingItems key={listItem._id} listItem={listItem}/>
+          ))}
+        </div>
       </div>
     </div>
   );
