@@ -6,7 +6,7 @@
 
 <h2>Project Screenshots:</h2>
 
-<img src="https://firebasestorage.googleapis.com/v0/b/mern-estate-38814.appspot.com/o/1707880580309Screenshot%202024-02-14%20005023.png?alt=media&amp;token=c6924b1c-4ed3-43e1-a2be-4d6bf2992783" alt="project-screenshot" width="1000" height="100/">
+<img src="https://firebasestorage.googleapis.com/v0/b/mern-estate-38814.appspot.com/o/1707880580309Screenshot%202024-02-14%20005023.png?alt=media&amp;token=c6924b1c-4ed3-43e1-a2be-4d6bf2992783" alt="project-screenshot" width="1000" height="1000/">
 
   
   
