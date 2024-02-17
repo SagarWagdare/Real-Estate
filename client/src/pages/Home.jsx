@@ -65,7 +65,7 @@ const Home = () => {
           <br />
           Our expert support are always available.
         </div>
-        <Link to={currentUser?"/":"/sign-in"} className=" text-blue-700 font-semibold hover:underline">
+        <Link to={currentUser?"/search":"/sign-in"} className=" text-blue-700 font-semibold hover:underline">
 
           Let&apos;s get started...
         </Link>
