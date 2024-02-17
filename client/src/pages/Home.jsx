@@ -7,7 +7,10 @@ import { Navigation } from "swiper/modules";
 import { Autoplay } from "swiper/modules";
 import ListingItem from "../components/ListingItems"
 import "swiper/css/bundle";
+import { useSelector } from "react-redux";
 const Home = () => {
+  const {currentUser} = useSelector((state)=>state.user)
+  
   SwiperCore.use([Navigation]);
   SwiperCore.use([Autoplay]);
 
@@ -62,7 +65,8 @@ const Home = () => {
           <br />
           Our expert support are always available.
         </div>
-        <Link className=" text-blue-700 font-semibold hover:underline">
+        <Link to={currentUser?"/":"/sign-up"} className=" text-blue-700 font-semibold hover:underline">
+
           Let&apos;s get started...
         </Link>
       </div>
