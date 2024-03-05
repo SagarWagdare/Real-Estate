@@ -26,7 +26,6 @@ const Signin = () => {
       })
       .catch((err) => {
         dispatch(signInFailure(err?.response?.data?.message))
-        console.log(err)
       });
       dispatch(signInStart())
 

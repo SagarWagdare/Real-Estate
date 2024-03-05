@@ -1,4 +1,3 @@
-import React from "react";
 import { FcGoogle } from "react-icons/fc";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import { app } from "../firebase";
@@ -23,7 +22,6 @@ const OAuth = () => {
       dispatch(signInSuccess(res?.data))
       navigate("/")
      }).catch((err)=>{
-      console.log(err)
       dispatch(signInStart(err))
      })
     } catch (error) {

@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 const Contact = ({ listing }) => {
   const [landlord, setLandlord] = useState(null);
   const [message, setMessage] = useState("");
-  console.log("👉 ~ Contact ~ message⭐", message);
   useEffect(() => {
     const fetchLandlord = async () => {
       await axios

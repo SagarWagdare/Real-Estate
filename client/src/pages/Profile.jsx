@@ -81,7 +81,6 @@ const Profile = () => {
         setUpdateSuccess(true);
       })
       .catch((err) => {
-        console.log(err);
         dispatch(updateUserFailure(err?.message));
       });
   };
@@ -104,7 +103,6 @@ const Profile = () => {
     await axios
       .get("/api/auth/signout")
       .then((res) => {
-        console.log(res);
         dispatch(deleteUserSuccess(res));
       })
       .catch((err) => {
@@ -117,7 +115,6 @@ const Profile = () => {
       await axios
         .get(`/api/user/listings/${currentUser._id}`)
         .then((res) => {
-          console.log(res);
           setUserListings(res?.data);
         })
         .catch((err) => {
@@ -132,7 +129,6 @@ const Profile = () => {
     await axios
       .delete(`/api/listing/delete/${listingId}`)
       .then((res) => {
-        console.log(res);
         setUserListings((prev) =>
           prev.filter((listing) => listing._id !== listingId)
         );
