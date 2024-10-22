@@ -5,10 +5,10 @@
 <p id="description">Implemented secure user authentication and authorization to ensure data security.Users can browse through a variety of property listings with detailed information and images. Integrated search and filter functionality to help users find their ideal properties efficiently. Developed a responsive design to ensure seamless user experience across devices.</p>
 
 <h2> Demo 👇</h2>
-[https://mern-estate-ugvb.onrender.com](https://mern-estate-ugvb.onrender.com)
+[https://mern-estate-ugvb.onrender.com]
+
 
 Technologies used in the project:
-
 *   MongoDB
 *   ExpressJs
 *   ReactJs
