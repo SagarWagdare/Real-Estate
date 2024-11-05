@@ -1,5 +1,7 @@
 <h1 align="center" id="title">RealEstate Mern Web Application! </h1>
-![RealEstate](https://github.com/user-attachments/assets/d059f49a-b4d2-442e-af22-d6df6c998b10)
+
+![RealEstate](https://github.com/user-attachments/assets/00f71e61-a239-4e57-9bb5-d161475e05f2)
+
 
 <img src="https://socialify.git.ci/SagarWagdare/Real-Estate/image?language=1&name=1&owner=1&pattern=Solid&theme=Dark" alt="Real-Estate" width="1000" height="auto" />
 
